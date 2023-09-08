@@ -26,14 +26,16 @@ Daftar Peran
             <th scope="col">Film</th>
             <th scope="col">Cast</th>
             <th scope="col">Nama</th>
+            <th scope="col">Action</th>
+
         </tr>
     </thead>
     <tbody>
         @forelse($peran as $key => $item)
         <tr>
             <td>{{ $key + 1 }}</td>
-            <td>{{$item ->Film}}</td>
-            <td>{{$item ->Cast}}</td>
+            <td>{{$item ->Film->judul}}</td>
+            <td>{{$item ->Cast->nama}}</td>
             <td>{{$item ->Nama}}</td>
             <td>
                 <form action="/peran/{{ $item->id }}" method="POST">

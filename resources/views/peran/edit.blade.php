@@ -11,18 +11,24 @@ Edit Peran
     @method('PUT')
     <div class="form-group">
         <label>Film</label>
-        <input type="text" name="judul" value="{{ $peran->film }}" class="form-control">
-        @error('judul')
-            <div class="btn btn-danger">{{ $message }}</div>
-        @enderror
+        <select class="form-control" name="film_id">
+            <option value="">Pilih Film</option>
+            @forelse ($film as $key => $item)
+                <option value="{{ $item['id'] }}">{{ $item['judul'] }}</option>
+            @empty
+            @endforelse 
+        </select>
     </div>
-    
+
     <div class="form-group">
         <label>Cast</label>
-        <input type="text" name="ringkasan" value="{{ $peran->cast }}" class="form-control">
-        @error('cast')
-            <div class="btn btn-danger">{{ $message }}</div>
-        @enderror
+        <select class="form-control" name="cast_id">
+            <option value="">Pilih Cast</option>
+            @forelse ($cast as $key => $item)
+                <option value="{{ $item['id'] }}">{{ $item['nama'] }}</option>
+            @empty
+            @endforelse 
+        </select>
     </div>
     
     <div class="form-group">

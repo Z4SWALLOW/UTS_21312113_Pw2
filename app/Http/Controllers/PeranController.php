@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Cast;
+use App\Models\Film;
 use App\Models\Peran;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
@@ -28,7 +29,9 @@ class PeranController extends Controller
     public function create()
     {
         //
-        return view('Peran.create');
+        $film = Film::all();
+        $cast = Cast::all();
+        return view('peran.create', compact('film', 'cast'));
     }
 
     /**
@@ -43,14 +46,14 @@ class PeranController extends Controller
         $peran = new Peran;
 
         $request->validate([
-            'film' => 'required',
-            'cast' => 'required',
+            'film_id' => 'required',
+            'cast_id' => 'required',
             'nama' => 'required',
 
         ]);
         
-        $peran->film_id = $request->film;
-        $peran->cast_id = $request->cast;
+        $peran->film_id = $request->film_id;
+        $peran->cast_id = $request->cast_id;
         $peran->nama = $request->nama;
 
         $simpan = $peran->save();
