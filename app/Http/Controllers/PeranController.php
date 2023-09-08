@@ -87,8 +87,9 @@ class PeranController extends Controller
     {
         //
         $peran = Peran::where('id', $id)->first();
-
-        return view('peran.edit', compact('peran'));
+        $film = Film::all();
+        $cast = Cast::all();
+        return view('peran.edit', compact('peran','film','cast'));
     }
 
     /**
@@ -102,19 +103,15 @@ class PeranController extends Controller
     {
         //
         $request->validate([
-            'judul' => 'required',
-            'ringkasan' => 'required',
-            'tahun' => 'required',
-            'poster' => 'required',
-            'genre_id' => 'required',
-        ]);
+            'film_id' => 'required',
+            'cast_id' => 'required',
+            'nama' => 'required',
 
+        ]);
         $peran = Peran::find($id);
-        $peran->judul = $request->judul;
-        $peran->ringkasan = $request->ringkasan;
-        $peran->tahun = $request->tahun;
-        $peran->poster = $request->poster;
-        $peran->genre_id = $request->genre_id;
+        $peran->film_id = $request->film_id;
+        $peran->cast_id = $request->cast_id;
+        $peran->nama = $request->nama;
         $edit = $peran->save();
 
         if($edit){
